@@ -9,12 +9,13 @@ function GetPermissions() {
 GetPermissions();
 var restart_button = document.querySelector("#restart");
 var lastNotification;
+var timer;
 restart_button.addEventListener("click", () => {
+    clearInterval(timer);
     if(lastNotification != null)
         lastNotification.close();
     lastNotification = new Notification("20 minutes timer has started!");
     var elapsedMinutes = 0;
-    var timer;
     timer = setInterval(() => {
         lastNotification.close();
         elapsedMinutes += 5;
@@ -24,5 +25,5 @@ restart_button.addEventListener("click", () => {
             lastNotification = new Notification("Times up!");
             clearInterval(timer);
         }
-    }, 1000 * 5);
+    }, 1000 * 60 * 5);
 });
